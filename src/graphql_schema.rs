@@ -11,6 +11,7 @@ use crate::handlers::startup_handler;
 use crate::schema::startups;
 
 #[derive(juniper::GraphQLObject, Queryable)]
+#[graphql(description = "A startup that is about to disrupt an industry")]
 struct Startup {
     id: Uuid,
     name: String,
@@ -21,6 +22,7 @@ struct Startup {
 
 #[derive(juniper::GraphQLInputObject, Insertable)]
 #[table_name = "startups"]
+#[graphql(description = "A startup that is about to disrupt an industry")]
 pub struct NewStartup {
     pub name: String,
     pub keyword: String,
