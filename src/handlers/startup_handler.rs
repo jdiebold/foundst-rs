@@ -1,7 +1,13 @@
+extern crate hsluv;
 extern crate hyphenation;
+extern crate palette;
+extern crate rand;
 
 use crate::graphql_schema::NewStartup;
+use hsluv::*;
 use hyphenation::*;
+use palette::{Hue, IntoColor, Srgb};
+use rand::prelude::*;
 
 pub fn generate_startup(input_keyword: String) -> NewStartup {
     let my_keyword = input_keyword.clone();
@@ -10,12 +16,17 @@ pub fn generate_startup(input_keyword: String) -> NewStartup {
         keyword: my_keyword,
         name: startup_name,
         value_proposition: format!("Using Quantum Computing for {}", input_keyword),
-        color_scheme: Some(vec![
-            String::from("color1"),
-            String::from("color2"),
-            String::from("color3"),
-        ]),
+        color_scheme: generate_color_scheme(),
     }
+}
+
+fn generate_color_scheme() -> Option<Vec<String>> {
+    let base_color: Srgb<f64> = Srgb::new(random(), random(), random());
+    let complementary: Srgb<f64> = Srgb::from(base_color.into_lch().shift_hue(180.0));
+    Some(vec![
+        rgb_to_hex(base_color.into_components()),
+        rgb_to_hex(complementary.into_components()),
+    ])
 }
 
 fn generate_startup_name(input_keyword: &String) -> String {
@@ -34,4 +45,9 @@ fn generate_startup_name(input_keyword: &String) -> String {
 fn generate_startup_name_test() {
     let keyword = String::from("Fishing");
     assert_eq!(generate_startup_name(&keyword), "Fishster");
+}
+
+#[test]
+fn generate_color_scheme_test() {
+    generate_color_scheme();
 }
