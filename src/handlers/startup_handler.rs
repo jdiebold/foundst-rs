@@ -49,5 +49,8 @@ fn generate_startup_name_test() {
 
 #[test]
 fn generate_color_scheme_test() {
-    generate_color_scheme();
+    let color_scheme = generate_color_scheme();
+    for color in color_scheme.unwrap() {
+        hex_to_rgb(&color);
+    }
 }
