@@ -1,0 +1,9 @@
+mutation generateStartup($keyword: String!) {
+  generateStartup(keyword: $keyword) {
+    id
+    name
+    valueProposition
+    keyword
+    colorScheme
+  }
+}
