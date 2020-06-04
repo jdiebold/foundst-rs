@@ -3,12 +3,18 @@ import ReactDOM from "react-dom";
 import "./tailwind.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import ApolloClient from "apollo-boost";
+import { ApolloClient, InMemoryCache } from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
+import { HttpLink } from "apollo-link-http";
+
+const httpLink = new HttpLink({
+  uri: "http://localhost:8080/graphql",
+});
 
 const client = new ApolloClient({
-  uri: "http://localhost:8080/graphql",
+  link: httpLink,
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
