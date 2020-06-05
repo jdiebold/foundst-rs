@@ -1,0 +1,9 @@
+query listStartups {
+  listStartups {
+    id
+    name
+    valueProposition
+    colorScheme
+    keyword
+  }
+}
