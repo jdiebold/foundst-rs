@@ -20,7 +20,7 @@ struct Startup {
     color_scheme: Option<Vec<String>>,
 }
 
-#[derive(juniper::GraphQLInputObject, Insertable)]
+#[derive(juniper::GraphQLInputObject, Insertable, Debug)]
 #[table_name = "startups"]
 #[graphql(description = "A startup that is about to disrupt an industry")]
 pub struct NewStartup {

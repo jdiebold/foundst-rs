@@ -3,6 +3,7 @@ import * as ApolloReactCommon from '@apollo/react-common';
 import * as React from 'react';
 import * as ApolloReactComponents from '@apollo/react-components';
 import * as ApolloReactHoc from '@apollo/react-hoc';
+import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
@@ -104,6 +105,28 @@ export function withGenerateStartup<TProps, TChildProps = {}, TDataName extends 
       ...operationOptions
     });
 };
+
+/**
+ * __useGenerateStartupMutation__
+ *
+ * To run a mutation, you first call `useGenerateStartupMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGenerateStartupMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [generateStartupMutation, { data, loading, error }] = useGenerateStartupMutation({
+ *   variables: {
+ *      keyword: // value for 'keyword'
+ *   },
+ * });
+ */
+export function useGenerateStartupMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<GenerateStartupMutation, GenerateStartupMutationVariables>) {
+        return ApolloReactHooks.useMutation<GenerateStartupMutation, GenerateStartupMutationVariables>(GenerateStartupDocument, baseOptions);
+      }
+export type GenerateStartupMutationHookResult = ReturnType<typeof useGenerateStartupMutation>;
 export type GenerateStartupMutationResult = ApolloReactCommon.MutationResult<GenerateStartupMutation>;
 export type GenerateStartupMutationOptions = ApolloReactCommon.BaseMutationOptions<GenerateStartupMutation, GenerateStartupMutationVariables>;
 export const ListStartupsDocument = gql`
@@ -136,4 +159,28 @@ export function withListStartups<TProps, TChildProps = {}, TDataName extends str
       ...operationOptions
     });
 };
+
+/**
+ * __useListStartupsQuery__
+ *
+ * To run a query within a React component, call `useListStartupsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListStartupsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListStartupsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useListStartupsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ListStartupsQuery, ListStartupsQueryVariables>) {
+        return ApolloReactHooks.useQuery<ListStartupsQuery, ListStartupsQueryVariables>(ListStartupsDocument, baseOptions);
+      }
+export function useListStartupsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListStartupsQuery, ListStartupsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ListStartupsQuery, ListStartupsQueryVariables>(ListStartupsDocument, baseOptions);
+        }
+export type ListStartupsQueryHookResult = ReturnType<typeof useListStartupsQuery>;
+export type ListStartupsLazyQueryHookResult = ReturnType<typeof useListStartupsLazyQuery>;
 export type ListStartupsQueryResult = ApolloReactCommon.QueryResult<ListStartupsQuery, ListStartupsQueryVariables>;
