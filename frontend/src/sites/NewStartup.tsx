@@ -49,6 +49,7 @@ function NewStartup() {
           name={data.generateStartup.name}
           keyword={data.generateStartup.keyword}
           valueProposition={data.generateStartup.valueProposition}
+          colorScheme={data.generateStartup.colorScheme}
         />
       ) : null}
     </div>
