@@ -2,6 +2,7 @@ import React from "react";
 import NewStartup from "./sites/NewStartup";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import StartupList from "./sites/StartupList";
+import StartupCockpit from "./sites/StartupCockpit";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         <Switch>
           <Route exact path="/" component={NewStartup} />
           <Route exact path="/startups" component={StartupList} />
+          <Route path="/startups/:id">
+            <StartupCockpit />
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>

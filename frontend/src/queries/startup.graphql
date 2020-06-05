@@ -1,0 +1,9 @@
+query startup($id: Uuid!) {
+  startup(selectedId: $id) {
+    id
+    name
+    valueProposition
+    colorScheme
+    keyword
+  }
+}

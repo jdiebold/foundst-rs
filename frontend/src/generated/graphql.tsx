@@ -62,6 +62,19 @@ export type GenerateStartupMutation = (
   ) }
 );
 
+export type StartupQueryVariables = {
+  id: Scalars['Uuid'];
+};
+
+
+export type StartupQuery = (
+  { __typename?: 'Query' }
+  & { startup: (
+    { __typename?: 'Startup' }
+    & Pick<Startup, 'id' | 'name' | 'valueProposition' | 'colorScheme' | 'keyword'>
+  ) }
+);
+
 export type ListStartupsQueryVariables = {};
 
 
@@ -129,6 +142,62 @@ export function useGenerateStartupMutation(baseOptions?: ApolloReactHooks.Mutati
 export type GenerateStartupMutationHookResult = ReturnType<typeof useGenerateStartupMutation>;
 export type GenerateStartupMutationResult = ApolloReactCommon.MutationResult<GenerateStartupMutation>;
 export type GenerateStartupMutationOptions = ApolloReactCommon.BaseMutationOptions<GenerateStartupMutation, GenerateStartupMutationVariables>;
+export const StartupDocument = gql`
+    query startup($id: Uuid!) {
+  startup(selectedId: $id) {
+    id
+    name
+    valueProposition
+    colorScheme
+    keyword
+  }
+}
+    `;
+export type StartupComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<StartupQuery, StartupQueryVariables>, 'query'> & ({ variables: StartupQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const StartupComponent = (props: StartupComponentProps) => (
+      <ApolloReactComponents.Query<StartupQuery, StartupQueryVariables> query={StartupDocument} {...props} />
+    );
+    
+export type StartupProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<StartupQuery, StartupQueryVariables>
+    } & TChildProps;
+export function withStartup<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  StartupQuery,
+  StartupQueryVariables,
+  StartupProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, StartupQuery, StartupQueryVariables, StartupProps<TChildProps, TDataName>>(StartupDocument, {
+      alias: 'startup',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useStartupQuery__
+ *
+ * To run a query within a React component, call `useStartupQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStartupQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStartupQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useStartupQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StartupQuery, StartupQueryVariables>) {
+        return ApolloReactHooks.useQuery<StartupQuery, StartupQueryVariables>(StartupDocument, baseOptions);
+      }
+export function useStartupLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StartupQuery, StartupQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<StartupQuery, StartupQueryVariables>(StartupDocument, baseOptions);
+        }
+export type StartupQueryHookResult = ReturnType<typeof useStartupQuery>;
+export type StartupLazyQueryHookResult = ReturnType<typeof useStartupLazyQuery>;
+export type StartupQueryResult = ApolloReactCommon.QueryResult<StartupQuery, StartupQueryVariables>;
 export const ListStartupsDocument = gql`
     query listStartups {
   listStartups {
