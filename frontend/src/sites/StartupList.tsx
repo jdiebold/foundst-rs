@@ -7,12 +7,12 @@ function StartupList() {
   const { data, loading, error } = useListStartupsQuery({
     variables: {},
   });
-  console.log(data);
   return (
     <div className="grid grid-cols-4">
       {data &&
         data.listStartups.map((startup) => (
           <StartupCard
+            key={startup.id}
             id={startup.id}
             name={startup.name}
             keyword={startup.keyword}
