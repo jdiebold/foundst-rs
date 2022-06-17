@@ -18,7 +18,7 @@ juniper = "0.14.1"
 env_logger= "0.6"
 futures= "0.1"
 serde_json= "1.0" 
-diesel = {version = "1.4.4", features = ["postgres","uuidv07"]}
+diesel = {version = "1.4.6", features = ["postgres","uuidv07"]}
 dotenv = "0.15.0" 
 hyphenation = { version = "*", features = ["embed_all"] }
 palette = "0.5.0"
